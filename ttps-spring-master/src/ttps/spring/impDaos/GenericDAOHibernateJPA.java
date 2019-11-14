@@ -5,15 +5,19 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
+import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
+import javax.transaction.Transactional;
+
 import ttps.spring.daos.*;
 
-
+@Transactional
 public class GenericDAOHibernateJPA<T> implements GenericDAO<T> {
 	
 	protected Class<T> persistentClass;
+	
+	private EntityManager entityManager;
 
 	public GenericDAOHibernateJPA(Class<T> clase) {
 		persistentClass = clase;
@@ -26,59 +30,46 @@ public class GenericDAOHibernateJPA<T> implements GenericDAO<T> {
 	public void setPersistentClass(Class<T> persistentClass) {
 		this.persistentClass = persistentClass;
 	}
+	
+	@PersistenceContext
+	 public void setEntityManager(EntityManager em)
+	 {
+		this.entityManager = em;
+	 }
+	 
+	 public EntityManager getEntityManager() 
+	 {
+		 return entityManager;
+	 }
+
 
 	@Override
 	public T persistir(T entity) {
-		EntityManager em = EMF.getEMF().createEntityManager();
-		EntityTransaction tx = null;
-		try {
-			tx = em.getTransaction();
-			tx.begin();
-			em.persist(entity);
-			tx.commit();
-		} catch (RuntimeException e) {
-			if (tx != null && tx.isActive())
-				tx.rollback();
-			throw e;
-		} finally {
-			em.close();
-		}
+		
+		this.getEntityManager().persist(entity);
+		
 		return entity;
 	}
 	
 	@Override
 	public T actualizar(T entity) {
-		EntityManager em = EMF.getEMF().createEntityManager();
-		EntityTransaction etx = em.getTransaction();
-		etx.begin();
-		T entityLocal = em.merge(entity);
-		etx.commit();
-		em.close();
+		
+		T entityLocal = this.getEntityManager().merge(entity);
+		
 		return entityLocal;
 	}
 
 	@Override
 	public void borrar(T entity) {
-		EntityManager em = EMF.getEMF().createEntityManager();
-		EntityTransaction tx = null;
-		try {
-			tx = em.getTransaction();
-			tx.begin();
-			em.remove(em.contains(entity) ? entity : em.merge(entity));
-//			em.remove(entity);
-			tx.commit();
-		} catch (RuntimeException e) {
-			if (tx != null && tx.isActive())
-				tx.rollback();
-			throw e; // escribir en un log o mostrar un mensaje
-		} finally {
-			em.close();
-		}
+		
+		this.getEntityManager().remove(entity);
 	}
 	
 	@Override
 	public T borrar(Serializable id) {
-		T entity = EMF.getEMF().createEntityManager().find(this.getPersistentClass(), id);
+
+		T entity = this.getEntityManager().find(this.getPersistentClass(), id);
+		
 		if (entity != null) {
 			this.borrar(entity);
 		}
@@ -87,7 +78,7 @@ public class GenericDAOHibernateJPA<T> implements GenericDAO<T> {
 
 	@Override
 	public List<T> recuperarTodos(String columnOrder) {
-		Query consulta= EMF.getEMF().createEntityManager().createQuery("select e from " + getPersistentClass().getSimpleName()+" e order by e."+columnOrder);
+		Query consulta= this.getEntityManager().createQuery("select e from " + getPersistentClass().getSimpleName()+" e order by e."+columnOrder);
 		@SuppressWarnings("unchecked")
 		List<T> resultado = (List<T>)consulta.getResultList();
 		return resultado;
@@ -100,7 +91,7 @@ public class GenericDAOHibernateJPA<T> implements GenericDAO<T> {
 						+ "CASE WHEN (count(e.id) > 0) THEN  true ELSE false END "
 						+ "FROM "+ getPersistentClass().getName() +" e "
 						+ "WHERE e.id = "+ id ;
-				TypedQuery<Boolean> booleanQuery = EMF.getEMF().createEntityManager().createQuery(query, Boolean.class);
+				TypedQuery<Boolean> booleanQuery = this.getEntityManager().createQuery(query, Boolean.class);
 				boolean exists = booleanQuery.getSingleResult();
 				
 				return exists;
@@ -108,7 +99,7 @@ public class GenericDAOHibernateJPA<T> implements GenericDAO<T> {
 
 	@Override
 	public T recuperar(Serializable id) {
-		Query consulta= EMF.getEMF().createEntityManager().createQuery
+		Query consulta= this.getEntityManager().createQuery
 				("SELECT e FROM " +  getPersistentClass().getName() +" e WHERE e.id="+ id );
 	
 		@SuppressWarnings("unchecked")
@@ -120,9 +111,9 @@ public class GenericDAOHibernateJPA<T> implements GenericDAO<T> {
 	@Override
 	public T recuperarPorNombreDescripcion(Class entidad, String campo, String valor)
 	{
-		EntityManager entityManager = EMF.getEMF().createEntityManager();
 		
-		Query consulta= entityManager.createQuery
+		
+		Query consulta= this.getEntityManager().createQuery
 				("SELECT e FROM " +  getPersistentClass().getName() +" e WHERE e."+ campo  +"= '"+ valor +"'" );
 	    
 		@SuppressWarnings("unchecked")
