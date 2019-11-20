@@ -14,7 +14,7 @@ public class EspecieDAOHibernateJPA extends GenericDAOHibernateJPA<Especie> impl
 	}
 	
 	public Especie recuperarPorDescripcion(String descripcion) {
-		Query consulta= EMF.getEMF().createEntityManager().createQuery
+		Query consulta= this.getEntityManager().createQuery
 				("SELECT e FROM " +  getPersistentClass().getName() +" e WHERE e.descripcion='"+ descripcion+"'" );
 	
 		

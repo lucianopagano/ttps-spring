@@ -1,10 +1,13 @@
 package ttps.spring.services;
 
-public class MascotaService implements IMascotaService {
+import java.util.List;
 
-	@Override
-	public void CrearMiPrimerEntity() {
+import ttps.spring.model.Mascota;
 
-	}
+public interface MascotaService {
 
+	void CargaInicial();
+	
+	Mascota CrearMascota(Mascota mascotaACrear);
+	List<Mascota> ObtenerMascotaPorDueño(int dueñoId);
 }

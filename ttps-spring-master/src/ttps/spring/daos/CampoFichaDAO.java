@@ -1,8 +1,10 @@
 package ttps.spring.daos;
 
-import ttps.spring.model.*;
+import org.springframework.stereotype.Repository;
 
-public interface CampoFichaDAO extends GenericDAO<CampoFicha> 
-{
+import ttps.spring.model.CampoFicha;
+
+@Repository
+public interface CampoFichaDAO extends GenericDAO<CampoFicha>{
 	
 }

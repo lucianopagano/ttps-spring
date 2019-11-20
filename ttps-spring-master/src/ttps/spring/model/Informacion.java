@@ -2,33 +2,25 @@ package ttps.spring.model;
 
 import java.io.Serializable;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.Table;
 
 @Entity
-@Table(name = "INFORMACION")
 public class Informacion implements Serializable {	
 
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue
-	@Column(name = "ID_INFORMACION")
 	private int id;
 	
-	@Column(name = "PESO")
 	private double peso;
 	
-	@Column(name = "DROGA")
 	private String droga;
 	
-	@Column(name = "DIAGNOSTICO")
 	private String diagnostico;
 	
-	@Column(name = "INDICACIONES")
 	private String indicaciones;
 	
 	public Informacion() {}

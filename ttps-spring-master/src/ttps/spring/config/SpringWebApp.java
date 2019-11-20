@@ -1,16 +1,24 @@
 package ttps.spring.config;
 
+
+
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.servlet.DispatcherServlet;
 
-public class SpringWebApp implements WebApplicationInitializer {
 
+import ttps.spring.services.MascotaService;
+
+
+
+public class SpringWebApp implements WebApplicationInitializer {
+	
 	@Override
 	public void onStartup(ServletContext container) throws ServletException {
 		// Create the 'root' Spring application context
@@ -24,7 +32,6 @@ public class SpringWebApp implements WebApplicationInitializer {
 		ServletRegistration.Dynamic dispatcher = container.addServlet("DispatcherServlet", new DispatcherServlet(rootContext));
 		dispatcher.setLoadOnStartup(1);
 		dispatcher.addMapping("/");
-		
-	}
+	}	
 
 }

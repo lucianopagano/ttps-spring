@@ -1,24 +1,19 @@
 package ttps.spring.model;
 import java.io.Serializable;
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.Table;
 
 @Entity
-@Table(name="CAMPOFICHA")
-
 public class CampoFicha implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
 	@Id
     @GeneratedValue
-    @Column(name = "CAMPOFICHA_ID")
 	private long id;
 
 	@ManyToOne(optional = true ,cascade = CascadeType.MERGE)
@@ -29,10 +24,8 @@ public class CampoFicha implements Serializable {
 	@JoinColumn(name = "CAMPO_ID")
 	private NombreCampo campo;	
 	
-	@Column(name = "VISIBILIDAD")
 	private Boolean visibilidad;
 	
-	@Column(name = "VALOR")
 	private String valor;
 	
 	public CampoFicha() {

@@ -13,7 +13,7 @@ public class TipoEventoDAOHibernateJPA extends GenericDAOHibernateJPA<TipoEvento
 	}
 	
 	public TipoEvento recuperarPorDescripcion(String descripcion) {
-		Query consulta= EMF.getEMF().createEntityManager().createQuery
+		Query consulta= this.getEntityManager().createQuery
 				("SELECT e FROM " +  getPersistentClass().getName() +" e WHERE e.descripcion='"+ descripcion+"'" );	
 		
 		TipoEvento resultado = (TipoEvento) consulta.getSingleResult();

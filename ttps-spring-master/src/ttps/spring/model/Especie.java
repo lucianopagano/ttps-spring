@@ -1,14 +1,11 @@
 package ttps.spring.model;
 
 import java.io.Serializable;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.Table;
 
 @Entity
-@Table(name = "ESPECIE")
 public class Especie implements Serializable {
 
 	
@@ -16,10 +13,8 @@ public class Especie implements Serializable {
 	
 	@Id
 	@GeneratedValue
-	@Column(name = "ID")
 	private int id;
 	
-	@Column(name = "DESCRIPCION")
 	private String descripcion;
 	
 	public Especie() {
