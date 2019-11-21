@@ -8,5 +8,5 @@ import ttps.spring.model.*;
 @Repository
 public interface TipoUsuarioDAO extends GenericDAO<TipoUsuario> 
 {
-	
+	int ObtenerIdTipoUsuario(String valDesc);
 }

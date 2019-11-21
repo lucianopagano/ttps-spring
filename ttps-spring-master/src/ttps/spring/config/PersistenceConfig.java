@@ -37,7 +37,7 @@ public class PersistenceConfig {
 	public DataSource dataSource() {
 		DriverManagerDataSource driverManagerDataSource = new DriverManagerDataSource();
 		driverManagerDataSource.setUsername("root");
-		driverManagerDataSource.setPassword("");
+		driverManagerDataSource.setPassword("admin");
 		driverManagerDataSource.setUrl("jdbc:mysql://localhost:3306/veterinaria");
 		driverManagerDataSource.setDriverClassName("com.mysql.jdbc.Driver");
 		return driverManagerDataSource;
@@ -56,6 +56,11 @@ public class PersistenceConfig {
 		properties.setProperty("hibernate.hbm2ddl.auto", "create-drop");
 		properties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL8Dialect");
 		properties.setProperty("hibernate.default_schema", "veterinaria");
+		
+		properties.setProperty("hibernate.show_sql", "true");
+		properties.setProperty("hibernate.format_sql", "true");
+		properties.setProperty("hibernate.use_sql_comments", "true");
+		
 		return properties;
 	}
 		

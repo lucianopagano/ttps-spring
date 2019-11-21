@@ -7,5 +7,6 @@ import ttps.spring.model.*;
 @Repository
 public interface UsuarioDAO extends GenericDAO<Usuario> 
 {
+	Usuario ObtenerUsuario(String userName,String pass);
 	
 }

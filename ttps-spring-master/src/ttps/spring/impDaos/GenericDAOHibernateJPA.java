@@ -107,9 +107,8 @@ public class GenericDAOHibernateJPA<T> implements GenericDAO<T> {
 		return resultado;
 	}
 	
-	@SuppressWarnings("rawtypes")
 	@Override
-	public T recuperarPorNombreDescripcion(Class entidad, String campo, String valor)
+	public T recuperarPorNombreDescripcion(String campo, String valor)
 	{
 		
 		

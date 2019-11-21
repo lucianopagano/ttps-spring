@@ -59,7 +59,7 @@ public class MascotaServiceImpl implements MascotaService {
 		
 		for (CampoFicha campo : mascotaACrear.getCampoFicha()) 
 		{ 
-		    NombreCampo campoNombre = campoDao.recuperarPorNombreDescripcion(NombreCampo.class, "nombre", campo.getCampo().getNombre());
+		    NombreCampo campoNombre = campoDao.recuperarPorNombreDescripcion("nombre", campo.getCampo().getNombre());
 			
 		    CampoFicha campoACrear = new CampoFicha(nuevaMascota, campoNombre,campo.getVisibilidad(),campo.getValor());
 		    
@@ -72,7 +72,6 @@ public class MascotaServiceImpl implements MascotaService {
 	 	
 	}
 	
-	@SuppressWarnings("unchecked")
 	@Override
 	public List<Mascota> ObtenerMascotaPorDueño(int duenioId) {
 		// TODO Auto-generated method stub
@@ -165,7 +164,7 @@ public class MascotaServiceImpl implements MascotaService {
 		campoDao.persistir(campoSenia);
 		campoDao.persistir(campoVeterinario);
 		
-		TipoUsuario duenio 		  = tipoUsuarioDAO.recuperarPorNombreDescripcion(TipoUsuario.class, "descripcion", "Dueno");
+		TipoUsuario duenio 		  = tipoUsuarioDAO.recuperarPorNombreDescripcion("descripcion", "Dueno");
 		
 		
 		Usuario duenioDe2Mascotas 	= new Usuario("juan", "1234", "Juan", "Alvarez", "221532355", "juanalvarez@gmail.com", duenio);

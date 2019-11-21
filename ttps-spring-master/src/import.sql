@@ -52,4 +52,6 @@ INSERT INTO tipousuario(id, descripcion) VALUES (17, 'Dueno');
 
 
 INSERT INTO usuario(id, apellido, contrasena, email, nombre, nombreUsuario, telefono, TIPO_ID, veterinaria_id) VALUES(24, 'Alvarez', '1234', 'juanalvarez@gmail.com', 'Juan', 'juan', '221532355', 17, NULL);
+INSERT INTO usuario(id, apellido, contrasena, email, nombre, nombreUsuario, telefono, TIPO_ID, veterinaria_id) VALUES(25, 'Pontiroli', '12345', 'gasparpontiroli@gmail.com', 'Gaspar', 'gaspar', '221456789', 16, NULL);
+INSERT INTO usuario(id, apellido, contrasena, email, nombre, nombreUsuario, telefono, TIPO_ID, veterinaria_id) VALUES(26, 'Pagano', '123456', 'lucho@gmail.com', 'Luciano', 'lucho', '221567333', 15, NULL);
 COMMIT;

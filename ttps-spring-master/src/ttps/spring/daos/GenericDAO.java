@@ -20,6 +20,5 @@ public interface GenericDAO<T> {
 	
 	public List<T> recuperarTodos(String columnOrder);
 
-	@SuppressWarnings("rawtypes")
-	public T recuperarPorNombreDescripcion(Class entidad, String campo, String valor);	
+	public T recuperarPorNombreDescripcion(String campo, String valor);	
 }

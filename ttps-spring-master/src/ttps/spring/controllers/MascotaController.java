@@ -27,12 +27,13 @@ public class MascotaController {
 	//@GetMapping("/{id}")
 	// public ResponseEntity<User> getUser(@PathVariable("id") long id) 
 	
+	@SuppressWarnings("unused")
 	@GetMapping("/{id}")
 	public ResponseEntity<List<Mascota>> listarMascotasDuenio(@PathVariable("id") int id) {
 		
 		List<Mascota> mascotasDuenio = mascotaService.ObtenerMascotaPorDueño(id);
-		List<CampoFicha> elima = mascotasDuenio.get(0).getCampoFicha();
-		if (mascotasDuenio == null) {
+
+		if (mascotasDuenio == null ) {
 			return new ResponseEntity<List<Mascota>>(HttpStatus.NO_CONTENT);
 		}
 		
