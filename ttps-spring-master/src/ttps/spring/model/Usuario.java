@@ -12,7 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 @Entity
@@ -45,9 +45,11 @@ public class Usuario implements Serializable {
 	private TipoUsuario tipo;
 	
 	@OneToMany(mappedBy="duenio", cascade = CascadeType.ALL)
+	@JsonIgnore
 	private List<Mascota> mascotas;
 	
 	@OneToMany(mappedBy="veterinario", cascade = CascadeType.ALL)
+	@JsonIgnore
 	private List<Mascota> pacientes;
 	
 	public Usuario() {}

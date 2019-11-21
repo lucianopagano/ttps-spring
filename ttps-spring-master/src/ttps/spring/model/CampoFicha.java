@@ -1,11 +1,14 @@
 package ttps.spring.model;
 import java.io.Serializable;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class CampoFicha implements Serializable {
@@ -18,6 +21,7 @@ public class CampoFicha implements Serializable {
 
 	@ManyToOne(optional = true ,cascade = CascadeType.MERGE)
 	@JoinColumn(name = "MascotaId",nullable = false)
+	@JsonIgnore()
 	private Mascota mascota;
 
 	@ManyToOne(cascade = CascadeType.MERGE)

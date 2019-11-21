@@ -2,6 +2,7 @@ package ttps.spring.services;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -47,7 +48,6 @@ public class MascotaServiceImpl implements MascotaService {
 		
 		// recupero la raza
 		Raza raza = razaDAO.recuperar(mascotaACrear.getRaza().getId()); 
-				//razaDAO.recuperarPorNombreDescripcion(Raza.class, "descripcion", "Labrador");
 		
 		Usuario duenio = usuarioDao.recuperar(mascotaACrear.getDuenio().getId());
 		
@@ -72,13 +72,23 @@ public class MascotaServiceImpl implements MascotaService {
 	 	
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
-	public List<Mascota> ObtenerMascotaPorDueño(int dueñoId) {
-		
-		mascotaDao.recuperarTodos(null);
-		
+	public List<Mascota> ObtenerMascotaPorDueño(int duenioId) {
 		// TODO Auto-generated method stub
-		return new ArrayList<Mascota>();
+		List<Mascota> mascotas = this.ObtenerTodasLasMascotas();
+		if (mascotas.size() > 0) {
+			List<Mascota> mascotaDuenio = mascotas.stream().filter(t -> t.getDuenio().getId() == duenioId).collect(Collectors.toList());
+			return mascotaDuenio;
+		}
+		 
+		return null;
+	}
+
+	@Override
+	public List<Mascota> ObtenerTodasLasMascotas() {
+		// TODO Auto-generated method stub
+		return mascotaDao.recuperarTodos(null);
 	}
 	
 	@Override
@@ -160,7 +170,5 @@ public class MascotaServiceImpl implements MascotaService {
 		
 		Usuario duenioDe2Mascotas 	= new Usuario("juan", "1234", "Juan", "Alvarez", "221532355", "juanalvarez@gmail.com", duenio);
 		usuarioDao.persistir(duenioDe2Mascotas);
-	}
-	
-	
+	}	
 }

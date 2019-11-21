@@ -78,7 +78,7 @@ public class GenericDAOHibernateJPA<T> implements GenericDAO<T> {
 
 	@Override
 	public List<T> recuperarTodos(String columnOrder) {
-		Query consulta= this.getEntityManager().createQuery("select e from " + getPersistentClass().getSimpleName()+" e order by e."+columnOrder);
+		Query consulta= this.getEntityManager().createQuery("SELECT e FROM " + getPersistentClass().getName() + " e ");
 		@SuppressWarnings("unchecked")
 		List<T> resultado = (List<T>)consulta.getResultList();
 		return resultado;

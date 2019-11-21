@@ -9,5 +9,8 @@ public interface MascotaService {
 	void CargaInicial();
 	
 	Mascota CrearMascota(Mascota mascotaACrear);
+	
 	List<Mascota> ObtenerMascotaPorDueño(int dueñoId);
+	
+	List<Mascota> ObtenerTodasLasMascotas();
 }

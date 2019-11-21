@@ -9,7 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class NombreCampo implements Serializable {
@@ -25,7 +26,7 @@ public class NombreCampo implements Serializable {
 	public NombreCampo() {}
 	
 	@OneToMany(mappedBy = "campo", cascade = CascadeType.ALL)
-	@JsonBackReference
+	@JsonIgnore()
     private List<CampoFicha> ficha;
 	
 	public NombreCampo(String nombre) {		

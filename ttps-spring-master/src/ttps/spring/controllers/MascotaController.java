@@ -1,17 +1,19 @@
 package ttps.spring.controllers;
 
-import java.util.ArrayList;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import ttps.spring.model.CampoFicha;
 import ttps.spring.model.Mascota;
 import ttps.spring.services.MascotaService;
 
@@ -22,17 +24,19 @@ public class MascotaController {
 	@Autowired
 	private MascotaService mascotaService;
 	
-	@GetMapping
-	public ResponseEntity<List<Mascota>> listAllMascotas() {
+	//@GetMapping("/{id}")
+	// public ResponseEntity<User> getUser(@PathVariable("id") long id) 
+	
+	@GetMapping("/{id}")
+	public ResponseEntity<List<Mascota>> listarMascotasDuenio(@PathVariable("id") int id) {
 		
-		List<Mascota> users = mascotaService.ObtenerMascotaPorDueño(0);
-		if (users.isEmpty()) {
+		List<Mascota> mascotasDuenio = mascotaService.ObtenerMascotaPorDueño(id);
+		List<CampoFicha> elima = mascotasDuenio.get(0).getCampoFicha();
+		if (mascotasDuenio == null) {
 			return new ResponseEntity<List<Mascota>>(HttpStatus.NO_CONTENT);
 		}
 		
-		List<Mascota> mascotas = new ArrayList<Mascota>();
-		
-		return new ResponseEntity<List<Mascota>>(mascotas, HttpStatus.OK);
+		return new ResponseEntity<List<Mascota>>(mascotasDuenio, HttpStatus.OK);
 	}
 	
 	@PostMapping
@@ -50,5 +54,4 @@ public class MascotaController {
 		
 		return new ResponseEntity<Mascota>(m, HttpStatus.CREATED);
 	}
-	
 }
