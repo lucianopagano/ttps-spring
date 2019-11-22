@@ -148,4 +148,8 @@ public class Usuario implements Serializable {
 	public List<Mascota> getPacientes() {
 		return pacientes;
 	}
+
+	public void setPacientes(List<Mascota> pacientes) {
+		this.pacientes = pacientes;
+	}
 }

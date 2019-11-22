@@ -8,6 +8,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import ttps.spring.dto.LoginDto;
+import ttps.spring.dto.VeterinarioDto;
+import ttps.spring.dto.InformacionPersonalDto;
+import ttps.spring.dto.AdministradorDto;
+import ttps.spring.dto.DuenioDto;
 import ttps.spring.model.Usuario;
 import ttps.spring.services.LoginService;
 
@@ -19,16 +24,31 @@ public class LoginController {
 	private LoginService loginService;
 	
 	@PostMapping
-	public ResponseEntity<Usuario> Login(@RequestBody Usuario usuario)
+	public ResponseEntity<InformacionPersonalDto> Login(@RequestBody LoginDto datosLogin)
 	{
-		Usuario usuarioLogueado = loginService.Login(usuario.getNombreUsuario(), usuario.getContrasena());
+		if(datosLogin == null ||  datosLogin.getUsuario() == null || datosLogin.getPassword() == null)
+			return new ResponseEntity<InformacionPersonalDto>(HttpStatus.BAD_REQUEST);		
+		
+		Usuario usuarioLogueado = loginService.Ingresar(datosLogin);		
+		
+		InformacionPersonalDto tipoUsuario;
 		
 		if(usuarioLogueado == null) 
-			return new ResponseEntity<Usuario>(HttpStatus.UNAUTHORIZED);
+			return new ResponseEntity<InformacionPersonalDto>(HttpStatus.UNAUTHORIZED);
 		
+		switch (usuarioLogueado.getTipo().getDescripcion()) {
+		case "Dueno":	
+			tipoUsuario = new DuenioDto(usuarioLogueado);
+			break;
+			
+		case "Veterinario":	
+			tipoUsuario = new VeterinarioDto(usuarioLogueado);		
+			break;	
+		default: 
+			tipoUsuario = new AdministradorDto(usuarioLogueado);			
+		}		
 		
-		return new ResponseEntity<Usuario>(usuarioLogueado, HttpStatus.OK);
+		return new ResponseEntity<InformacionPersonalDto>(tipoUsuario, HttpStatus.OK);
 	
-	}
-	
+	}	
 }

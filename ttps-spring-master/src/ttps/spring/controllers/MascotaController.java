@@ -50,7 +50,6 @@ public class MascotaController {
 			return new ResponseEntity<Mascota>(HttpStatus.BAD_REQUEST);
 		}
 		
-		// creo la mascota
 		Mascota m = this.mascotaService.CrearMascota(mascota);
 		
 		return new ResponseEntity<Mascota>(m, HttpStatus.CREATED);

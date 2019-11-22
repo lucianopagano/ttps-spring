@@ -46,7 +46,6 @@ public class MascotaServiceImpl implements MascotaService {
 	@Override
 	public Mascota CrearMascota(Mascota mascotaACrear) {
 		
-		// recupero la raza
 		Raza raza = razaDAO.recuperar(mascotaACrear.getRaza().getId()); 
 		
 		Usuario duenio = usuarioDao.recuperar(mascotaACrear.getDuenio().getId());
@@ -54,7 +53,6 @@ public class MascotaServiceImpl implements MascotaService {
 		Mascota nuevaMascota = new Mascota(raza);
 		nuevaMascota.setDuenio(duenio);
 		
-		//creo todos los campo ficha necesarios uno por uno
 		List<CampoFicha> fichaNuevoPerro = new ArrayList<CampoFicha>();
 		
 		for (CampoFicha campo : mascotaACrear.getCampoFicha()) 
@@ -74,7 +72,6 @@ public class MascotaServiceImpl implements MascotaService {
 	
 	@Override
 	public List<Mascota> ObtenerMascotaPorDueño(int duenioId) {
-		// TODO Auto-generated method stub
 		List<Mascota> mascotas = this.ObtenerTodasLasMascotas();
 		if (mascotas.size() > 0) {
 			List<Mascota> mascotaDuenio = mascotas.stream().filter(t -> t.getDuenio().getId() == duenioId).collect(Collectors.toList());
@@ -86,88 +83,6 @@ public class MascotaServiceImpl implements MascotaService {
 
 	@Override
 	public List<Mascota> ObtenerTodasLasMascotas() {
-		// TODO Auto-generated method stub
 		return mascotaDao.recuperarTodos(null);
 	}
-	
-	@Override
-	public void CargaInicial() {
-		Especie perro 	= new Especie("Perro");
-		Especie gato 	= new Especie("Gato");
-		Especie ave 	= new Especie("Ave");
-		
-		//Guardo las Especies
-		especieDAO.persistir(perro);
-		especieDAO.persistir(gato);
-		especieDAO.persistir(ave);
-		
-		List<Raza> razas = new ArrayList<Raza>();
-		
-		Raza perro1 = new Raza("Labrador", perro);
-		razas.add(perro1);
-		
-		Raza perro2 = new Raza("Chihuahua",perro);
-		razas.add(perro2);
-		
-		Raza perro3 = new Raza("Dogo",perro);
-		razas.add(perro3);
-		
-		Raza perro4 = new Raza("Pitbull",perro);
-		razas.add(perro4);
-		
-		Raza perro5 = new Raza("Mestizo",perro);
-		razas.add(perro5);
-		
-		Raza gato1 = new Raza("Siames",gato);
-		razas.add(gato1);
-		
-		Raza gato2 = new Raza("Persa",gato);
-		razas.add(gato2);
-		
-		Raza gato3 = new Raza("Bengala",gato);
-		razas.add(gato3);
-				
-		Raza ave1 = new Raza("Loro",ave);
-		razas.add(ave1);
-		
-		Raza ave2 = new Raza("Papagayo",ave);
-		razas.add(ave2);
-		
-		Raza ave3 = new Raza("Canario",ave);
-		razas.add(ave3);
-		
-		//Guardo las razas
-		for(Raza r : razas)
-		{
-			razaDAO.persistir(r);
-		}
-		
-		TipoUsuario tipoUsuario1 = new TipoUsuario("Administrador");
-		tipoUsuarioDAO.persistir(tipoUsuario1);
-		TipoUsuario tipoUsuario2 = new TipoUsuario("Veterinario");
-		tipoUsuarioDAO.persistir(tipoUsuario2);
-		TipoUsuario tipoUsuario3 = new TipoUsuario("Dueno");
-		tipoUsuarioDAO.persistir(tipoUsuario3);	
-		
-		
-		NombreCampo campoNombre 		= new NombreCampo("Nombre");
-		NombreCampo campoFecha 			= new NombreCampo("FechaNacimiento");
-		NombreCampo campoSexo 			= new NombreCampo("Sexo");
-		NombreCampo campoColor 			= new NombreCampo("Color");
-		NombreCampo campoSenia 			= new NombreCampo("Señas Particulares");
-		NombreCampo campoVeterinario 	= new NombreCampo("Veterinario");
-		
-		campoDao.persistir(campoNombre);
-		campoDao.persistir(campoFecha);
-		campoDao.persistir(campoSexo);
-		campoDao.persistir(campoColor);
-		campoDao.persistir(campoSenia);
-		campoDao.persistir(campoVeterinario);
-		
-		TipoUsuario duenio 		  = tipoUsuarioDAO.recuperarPorNombreDescripcion("descripcion", "Dueno");
-		
-		
-		Usuario duenioDe2Mascotas 	= new Usuario("juan", "1234", "Juan", "Alvarez", "221532355", "juanalvarez@gmail.com", duenio);
-		usuarioDao.persistir(duenioDe2Mascotas);
-	}	
 }

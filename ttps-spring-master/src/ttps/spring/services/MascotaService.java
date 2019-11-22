@@ -6,7 +6,7 @@ import ttps.spring.model.Mascota;
 
 public interface MascotaService {
 
-	void CargaInicial();
+	//void CargaInicial();
 	
 	Mascota CrearMascota(Mascota mascotaACrear);
 	
