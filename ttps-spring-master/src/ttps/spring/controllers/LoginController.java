@@ -1,6 +1,7 @@
 package ttps.spring.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,6 +14,7 @@ import ttps.spring.dto.VeterinarioDto;
 import ttps.spring.dto.InformacionPersonalDto;
 import ttps.spring.dto.AdministradorDto;
 import ttps.spring.dto.DuenioDto;
+import ttps.spring.model.Mascota;
 import ttps.spring.model.Usuario;
 import ttps.spring.services.LoginService;
 
@@ -48,7 +50,10 @@ public class LoginController {
 			tipoUsuario = new AdministradorDto(usuarioLogueado);			
 		}		
 		
-		return new ResponseEntity<InformacionPersonalDto>(tipoUsuario, HttpStatus.OK);
+		HttpHeaders responseHeaders = new HttpHeaders();
+	    responseHeaders.set("token", "1234");	    
+	    
+		return ResponseEntity.ok().headers(responseHeaders).body(tipoUsuario);
 	
 	}	
 }
