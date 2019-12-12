@@ -85,4 +85,16 @@ public class MascotaServiceImpl implements MascotaService {
 	public List<Mascota> ObtenerTodasLasMascotas() {
 		return mascotaDao.recuperarTodos(null);
 	}
+	
+	@Override
+	public List<Especie> ObtenerTodasLasEspecies()
+	{
+		return especieDAO.recuperarTodos(null);
+	}
+	
+	@Override
+	public List<Raza> ObtenerRazasPorEspecie(int idEspecie)
+	{
+		return razaDAO.ObtenerRazasPorEspecie(idEspecie);
+	}
 }

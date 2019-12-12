@@ -17,12 +17,16 @@ import org.springframework.http.HttpStatus;
 
 import ttps.spring.services.TokenService;
 
+
+
 /**
  * Servlet Filter implementation class JWTAuthenticationFilter
  */
 @WebFilter(filterName = "jwt-auth-filter", urlPatterns = "*")
 public class JWTAuthenticationFilter implements Filter {
 
+	String excluded = "/ttps-spring/mascotas";
+	
     /**
      * Default constructor. 
      */
@@ -43,9 +47,16 @@ public class JWTAuthenticationFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		HttpServletRequest req = (HttpServletRequest) request;
 		
-		 if ("/ttps-spring/login".equals(req.getRequestURI()) || "/ttps-spring/registrar".equals(req.getRequestURI()) || HttpMethod.OPTIONS.matches(req.getMethod())) {
+		//excluyo las rutas
+		if (excluded.equals(req.getRequestURI())) 
+		{
+			chain.doFilter(request, response);
+		}
+		
+		
+		if ("/ttps-spring/login".equals(req.getRequestURI()) || "/ttps-spring/registrar".equals(req.getRequestURI()) || HttpMethod.OPTIONS.matches(req.getMethod())) {
 			 	chain.doFilter(request, response);
-			 	return;
+			 	return ;
 		 }
 		 
 		 String token = req.getHeader(HttpHeaders.AUTHORIZATION);
