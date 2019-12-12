@@ -51,8 +51,8 @@ public class JWTAuthenticationFilter implements Filter {
 		if (excluded.equals(req.getRequestURI())) 
 		{
 			chain.doFilter(request, response);
-		}
-		
+			return;
+		}		
 		String path = ((HttpServletRequest) request).getRequestURI();
 		
 		
@@ -60,7 +60,6 @@ public class JWTAuthenticationFilter implements Filter {
 		 	chain.doFilter(request, response);
 		 	return ;
 		}
-		 
 		 String token = req.getHeader(HttpHeaders.AUTHORIZATION);
 		 
 		 if (token == null || !TokenService.validateToken(token)) {

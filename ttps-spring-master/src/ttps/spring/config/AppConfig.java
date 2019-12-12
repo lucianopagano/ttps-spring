@@ -27,10 +27,6 @@ public class AppConfig implements WebMvcConfigurer  {
                     .addResourceLocations("/public", "classpath:/imagenes")
                     .setCachePeriod(31556926);
             
-//    		registry.addResourceHandler("/**")
-//    		.addResourceLocations("classpath:/imagenes");
-            
-            //.addResourceLocations("classpath:/imagenes");
     }
 	
     @Override
