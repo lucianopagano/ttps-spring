@@ -27,7 +27,8 @@ INSERT INTO nombrecampo(id, nombre) VALUES(20, 'Sexo');
 INSERT INTO nombrecampo(id, nombre) VALUES(21, 'Color');
 INSERT INTO nombrecampo(id, nombre) VALUES(22, 'SenasParticulares');
 INSERT INTO nombrecampo(id, nombre) VALUES(23, 'Veterinario');
- 
+INSERT INTO nombrecampo(id, nombre) VALUES(24, 'imagen'); 
+
 INSERT INTO raza(id, descripcion, especie_id) VALUES(4, 'Labrador', 1);
 INSERT INTO raza(id, descripcion, especie_id) VALUES(5, 'Chihuahua', 1);
 INSERT INTO raza(id, descripcion, especie_id) VALUES(6, 'Dogo', 1);
@@ -64,5 +65,7 @@ INSERT INTO campoficha(id, valor, visibilidad, CAMPO_ID, MascotaId) VALUES(7, '0
 INSERT INTO campoficha(id, valor, visibilidad, CAMPO_ID, MascotaId) VALUES(8, 'F', 0, 20, 2);
 INSERT INTO campoficha(id, valor, visibilidad, CAMPO_ID, MascotaId) VALUES(9, 'Blanca', 1, 21, 2);
 INSERT INTO campoficha(id, valor, visibilidad, CAMPO_ID, MascotaId) VALUES(10, 'N/A', 0, 22, 2);
+INSERT INTO campoficha(id, valor, visibilidad, CAMPO_ID, MascotaId) VALUES (11, 'perro1.jpg', 1, 24, 1);	
+INSERT INTO campoficha(id, valor, visibilidad, CAMPO_ID, MascotaId) VALUES (12, 'gato.jpg', 1, 24, 2);
 
 COMMIT;

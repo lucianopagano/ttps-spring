@@ -17,6 +17,7 @@ import ttps.spring.dto.DuenioDto;
 import ttps.spring.model.Mascota;
 import ttps.spring.model.Usuario;
 import ttps.spring.services.LoginService;
+import ttps.spring.services.TokenService;
 
 @RestController
 @RequestMapping("/login")
@@ -24,6 +25,11 @@ public class LoginController {
 
 	@Autowired
 	private LoginService loginService;
+	
+	 @Autowired
+	 private TokenService tokenService;
+	
+	 private final int EXPIRATION_IN_SEC = 3600; 
 	
 	@PostMapping
 	public ResponseEntity<InformacionPersonalDto> Login(@RequestBody LoginDto datosLogin)
@@ -47,11 +53,14 @@ public class LoginController {
 			tipoUsuario = new VeterinarioDto(usuarioLogueado);		
 			break;	
 		default: 
-			tipoUsuario = new AdministradorDto(usuarioLogueado);			
+			tipoUsuario = new AdministradorDto(usuarioLogueado);
 		}		
 		
+		String token = tokenService.generateToken(datosLogin.getUsuario(), EXPIRATION_IN_SEC);
+		
 		HttpHeaders responseHeaders = new HttpHeaders();
-	    responseHeaders.set("token", "1234");	    
+		responseHeaders.set("Access-Control-Expose-Headers", "Authorization, X-Custom");
+	    responseHeaders.set(HttpHeaders.AUTHORIZATION, token); 
 	    
 		return ResponseEntity.ok().headers(responseHeaders).body(tipoUsuario);
 	
