@@ -19,4 +19,6 @@ public interface MascotaService {
 	List<Especie> ObtenerTodasLasEspecies();
 	
 	List<Raza> ObtenerRazasPorEspecie(int idEspecie);
+	
+	List<Mascota> ObtenerPacientesVeterinario(int veterinarioId);
 }

@@ -1,8 +1,12 @@
 package ttps.spring.controllers;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,10 +16,13 @@ import ttps.spring.dto.AdministradorDto;
 import ttps.spring.dto.DuenioDto;
 import ttps.spring.dto.IdentityDto;
 import ttps.spring.dto.InformacionBasicaUsuarioDto;
+import ttps.spring.dto.InformacionMascotaDto;
 import ttps.spring.dto.InformacionPersonalDto;
 import ttps.spring.dto.UsuarioDto;
 import ttps.spring.dto.VeterinarioDto;
+import ttps.spring.model.Mascota;
 import ttps.spring.model.Usuario;
+import ttps.spring.services.MascotaService;
 import ttps.spring.services.UsuarioService;
 
 @RestController
@@ -23,6 +30,9 @@ public class UsuarioController {
 	
 	@Autowired
 	private UsuarioService usuarioService;
+	
+	@Autowired
+	private MascotaService mascotaService;
 	
 	@PostMapping
 	@RequestMapping("/actualizar")
@@ -75,10 +85,23 @@ public class UsuarioController {
 			break;	
 		default: 
 			tipoUsuario = new AdministradorDto(usuarioActual);
-		}
-		
+		}	
 		
 		return ResponseEntity.ok().body(tipoUsuario);
+	}
+	
+	@PostMapping
+	@RequestMapping("/pacientes/{id}")
+	public ResponseEntity<List<InformacionMascotaDto>> ObtenerPacientes(@PathVariable int id) {
+		
+		List<Mascota> listadoMascotas = mascotaService.ObtenerPacientesVeterinario(id);
+        List<InformacionMascotaDto> infoMascotas = new ArrayList<InformacionMascotaDto>();
+       
+        for (Mascota unaMascota : listadoMascotas) {
+            infoMascotas.add(new InformacionMascotaDto(unaMascota));           
+        }
+   
+        return new ResponseEntity<List<InformacionMascotaDto>>(infoMascotas, HttpStatus.OK);
 	}
 	
 }
