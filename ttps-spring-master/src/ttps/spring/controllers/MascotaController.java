@@ -14,10 +14,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
  
 import ttps.spring.dto.IdentityDto;
 import ttps.spring.dto.InformacionMascotaDto;
+import ttps.spring.dto.RazaEspecieDto;
 import ttps.spring.dto.VeterinarioDto;
 import ttps.spring.model.CampoFicha;
 import ttps.spring.model.Especie;
@@ -54,17 +56,23 @@ public class MascotaController {
     }
     
     //Obtiene todas las mascotas y sin seguridad
-  	@GetMapping("/mascotas")
-  	public ResponseEntity<List<Mascota>> obtenerMascotas()
+    @GetMapping("/mascotas")
+  	public ResponseEntity<List<InformacionMascotaDto>> obtenerMascotas()
   	{
   		List<Mascota> mascotas = mascotaService.ObtenerTodasLasMascotas();
   		if (mascotas != null && !mascotas.isEmpty() ) 
   		{
-  			return new ResponseEntity<List<Mascota>>(mascotas, HttpStatus.OK);
+  			List<InformacionMascotaDto> infoMascotas = new ArrayList<InformacionMascotaDto>();
+  			for (Mascota unaMascota : mascotas) {
+                infoMascotas.add(new InformacionMascotaDto(unaMascota));
+               
+            }
+  			
+  			return new ResponseEntity<List<InformacionMascotaDto>>(infoMascotas, HttpStatus.OK);
   		
   		}
   		
-  		return new ResponseEntity<List<Mascota>>(HttpStatus.NO_CONTENT);	
+  		return new ResponseEntity<List<InformacionMascotaDto>>(HttpStatus.NO_CONTENT);	
   		
   	}
   	
@@ -94,6 +102,29 @@ public class MascotaController {
   		}
   		
   		return new ResponseEntity<List<Raza>>(HttpStatus.NO_CONTENT);	
+  		
+  	}
+  	
+  	
+  	@GetMapping("/razas")
+  	public ResponseEntity<List<RazaEspecieDto>> obtenerTodasLasRazas()
+  	{
+  		List<Raza> razas = mascotaService.ObtenerTodasLasRazas();
+  	
+  		if (razas != null && !razas.isEmpty() ) 
+  		{
+  			List<RazaEspecieDto> especiesRazas = new ArrayList<RazaEspecieDto>();
+            
+            for (Raza unaRaza : razas) {
+            	especiesRazas.add(new RazaEspecieDto(unaRaza));
+               
+            }
+  			
+  			
+  			return new ResponseEntity<List<RazaEspecieDto>>(especiesRazas, HttpStatus.OK);
+  		}
+  		
+  		return new ResponseEntity<List<RazaEspecieDto>>(HttpStatus.NO_CONTENT);	
   		
   	}
   	

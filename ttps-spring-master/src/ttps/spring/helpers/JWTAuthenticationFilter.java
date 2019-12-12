@@ -46,7 +46,14 @@ public class JWTAuthenticationFilter implements Filter {
 	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		HttpServletRequest req = (HttpServletRequest) request;
-				
+		
+		//excluyo las rutas
+		if (excluded.equals(req.getRequestURI())) 
+		{
+			chain.doFilter(request, response);
+			return;
+		}
+	
 		if ("/ttps-spring/login".equals(req.getRequestURI()) || "/ttps-spring/registrar".equals(req.getRequestURI()) || HttpMethod.OPTIONS.matches(req.getMethod())) {
 			 	chain.doFilter(request, response);
 			 	return ;
