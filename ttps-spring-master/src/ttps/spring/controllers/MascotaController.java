@@ -44,7 +44,7 @@ public class MascotaController {
     @GetMapping("/mascotas/{id}")
     public ResponseEntity<List<Mascota>> listarMascotasDuenio(@PathVariable int id) {
                    
-            List<Mascota> mascotasDuenio = mascotaService.ObtenerMascotaPorDueño(id);
+            List<Mascota> mascotasDuenio = mascotaService.ObtenerMascotaPorDueno(id);
  
             if (mascotasDuenio != null && !mascotasDuenio.isEmpty() ) {
                 return new ResponseEntity<List<Mascota>>(mascotasDuenio, HttpStatus.OK);
@@ -76,7 +76,6 @@ public class MascotaController {
   		
   	}
   	
-  	//Obtener especies
   	@GetMapping("/especies")
   	public ResponseEntity<List<Especie>> obtenerEspecies()
   	{
@@ -166,7 +165,7 @@ public class MascotaController {
     @RequestMapping("/mismascotas/{id}")
     public ResponseEntity<List<InformacionMascotaDto>> obtenerInformacionMascotas(@PathVariable int id){
                    
-            List<Mascota> listadoMascotas = mascotaService.ObtenerMascotaPorDueño(id);
+            List<Mascota> listadoMascotas = mascotaService.ObtenerMascotaPorDueno(id);
             List<InformacionMascotaDto> infoMascotas = new ArrayList<InformacionMascotaDto>();
            
             for (Mascota unaMascota : listadoMascotas) {

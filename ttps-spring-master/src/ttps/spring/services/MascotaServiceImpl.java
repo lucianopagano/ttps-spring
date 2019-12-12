@@ -71,7 +71,7 @@ public class MascotaServiceImpl implements MascotaService {
 	}
 	
 	@Override
-	public List<Mascota> ObtenerMascotaPorDueño(int duenioId) {
+	public List<Mascota> ObtenerMascotaPorDueno(int duenioId) {
 		List<Mascota> mascotas = this.ObtenerTodasLasMascotas();
 		if (mascotas.size() > 0) {
 			List<Mascota> mascotaDuenio = mascotas.stream().filter(t -> t.getDuenio().getId() == duenioId).collect(Collectors.toList());

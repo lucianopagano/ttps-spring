@@ -12,7 +12,7 @@ public interface MascotaService {
 	
 	Mascota CrearMascota(Mascota mascotaACrear);
 	
-	List<Mascota> ObtenerMascotaPorDue�o(int due�oId);
+	List<Mascota> ObtenerMascotaPorDueno(int duenoId);
 	
 	List<Mascota> ObtenerTodasLasMascotas();
 	
