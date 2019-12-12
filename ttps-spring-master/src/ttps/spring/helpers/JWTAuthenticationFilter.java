@@ -52,13 +52,14 @@ public class JWTAuthenticationFilter implements Filter {
 		{
 			chain.doFilter(request, response);
 			return;
+		}		
+		String path = ((HttpServletRequest) request).getRequestURI();
+		
+		
+		if ("/ttps-spring/login".equals(req.getRequestURI()) || path.startsWith("/ttps-spring/imagenes") || "/ttps-spring/registrar".equals(req.getRequestURI()) || HttpMethod.OPTIONS.matches(req.getMethod())) {
+		 	chain.doFilter(request, response);
+		 	return ;
 		}
-	
-		if ("/ttps-spring/login".equals(req.getRequestURI()) || "/ttps-spring/registrar".equals(req.getRequestURI()) || HttpMethod.OPTIONS.matches(req.getMethod())) {
-			 	chain.doFilter(request, response);
-			 	return ;
-		 }
-		 
 		 String token = req.getHeader(HttpHeaders.AUTHORIZATION);
 		 
 		 if (token == null || !TokenService.validateToken(token)) {
