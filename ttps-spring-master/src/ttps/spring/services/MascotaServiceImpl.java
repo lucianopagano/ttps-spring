@@ -97,4 +97,10 @@ public class MascotaServiceImpl implements MascotaService {
 	{
 		return razaDAO.ObtenerRazasPorEspecie(idEspecie);
 	}
+	
+	@Override
+	public List<Raza> ObtenerTodasLasRazas()
+	{
+		return razaDAO.recuperarTodos(null);
+	}
 }
