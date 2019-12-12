@@ -12,7 +12,14 @@ public class InformacionMascotaDto {
 	private String senasParticulares;
 	private String color;
 	private String sexo;
-
+	private String urlImagen;
+	
+	public String getUrlImagen() {
+		return urlImagen;
+	}
+	public void setUrlImagen(String urlImagen) {
+		this.urlImagen = urlImagen;
+	}
 	public String getNombre() {
 		return nombre;
 	}
@@ -61,6 +68,7 @@ public class InformacionMascotaDto {
 	public void setSexo(String sexo) {
 		this.sexo = sexo;
 	}
+	
 
 	public InformacionMascotaDto(Mascota unaMascota) {
 		for (CampoFicha unCampo : unaMascota.getCampoFicha()) {
@@ -81,6 +89,9 @@ public class InformacionMascotaDto {
 			case "Sexo":
 				this.sexo = unCampo.getValor();
 				break;
+			case "imagen":
+				//String  HttpServletRequest.getLocalPort();
+				//this.urlImagen = // MyUtils.createURL(request,"/path/to/resource.html");
 			}		
 		}
 		
