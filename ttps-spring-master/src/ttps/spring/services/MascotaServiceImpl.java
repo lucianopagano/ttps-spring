@@ -80,6 +80,17 @@ public class MascotaServiceImpl implements MascotaService {
 		 
 		return null;
 	}
+	
+	@Override
+	public List<Mascota> ObtenerPacientesVeterinario(int veterinarioId) {
+		List<Mascota> mascotas = this.ObtenerTodasLasMascotas();
+		if (mascotas.size() > 0) {
+			List<Mascota> mascotaDuenio = mascotas.stream().filter(t -> t.getVeterinario().getId() == veterinarioId).collect(Collectors.toList());
+			return mascotaDuenio;
+		}
+		 
+		return null;
+	}
 
 	@Override
 	public List<Mascota> ObtenerTodasLasMascotas() {
