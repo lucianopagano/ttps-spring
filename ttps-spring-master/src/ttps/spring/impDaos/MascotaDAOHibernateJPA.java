@@ -10,5 +10,19 @@ import ttps.spring.model.*;
 public class MascotaDAOHibernateJPA extends GenericDAOHibernateJPA<Mascota> implements MascotaDAO {
 	public MascotaDAOHibernateJPA() {
 		super(Mascota.class);
+	}
+
+	@Override
+	public Mascota RegistrarMascota(Mascota mascota) {
+		Mascota nuevaMascota = new Mascota();
+
+		nuevaMascota.setDuenio(mascota.getDuenio());
+		nuevaMascota.setRaza(mascota.getRaza());
+		nuevaMascota.setVeterinario(mascota.getVeterinario());
+		
+		this.getEntityManager().persist(nuevaMascota);
+		this.getEntityManager().flush();	
+		
+		return nuevaMascota;
 	}	
 }

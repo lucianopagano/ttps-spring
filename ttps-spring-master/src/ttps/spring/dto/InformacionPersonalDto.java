@@ -13,12 +13,15 @@ public abstract class InformacionPersonalDto {
 	
 	private String rol;
 	
+	private String email;
+	
 	protected InformacionPersonalDto(Usuario usuario) {
 		this.setId(usuario.getId());
 		this.setApellido(usuario.getApellido());
 		this.setNombre(usuario.getNombre());
 		this.setTelefono(usuario.getTelefono());
 		this.setRol(usuario.getTipo().getDescripcion());
+		this.setEmail(usuario.getEmail());
 	}
 
 	public String getNombre() {
@@ -59,5 +62,13 @@ public abstract class InformacionPersonalDto {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 }
