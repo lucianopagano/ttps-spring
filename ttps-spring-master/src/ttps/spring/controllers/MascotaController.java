@@ -19,11 +19,13 @@ import org.springframework.web.bind.annotation.RestController;
  
 import ttps.spring.dto.IdentityDto;
 import ttps.spring.dto.InformacionMascotaDto;
+import ttps.spring.dto.MascotaDto;
 import ttps.spring.dto.RazaEspecieDto;
 import ttps.spring.dto.VeterinarioDto;
 import ttps.spring.model.CampoFicha;
 import ttps.spring.model.Especie;
 import ttps.spring.model.Mascota;
+import ttps.spring.model.NombreCampo;
 import ttps.spring.model.Raza;
 import ttps.spring.model.Usuario;
 import ttps.spring.services.MascotaService;
@@ -144,6 +146,27 @@ public class MascotaController {
             Mascota m = this.mascotaService.CrearMascota(mascota);
        
             return new ResponseEntity<Mascota>(m, HttpStatus.CREATED);
+    }
+    
+    @PostMapping
+    @RequestMapping("/nuevamascota")
+    public ResponseEntity<Mascota> agregarMascota(@RequestBody InformacionMascotaDto infoMascota){   	
+    	
+    	Usuario duenio = usuarioService.ObtenerUsuario(String.valueOf(infoMascota.getIdDueno()));
+    	Usuario veterinario = usuarioService.ObtenerUsuario(String.valueOf(infoMascota.getIdVeterinario()));
+    			
+            if(veterinario == null || duenio == null) {
+                return new ResponseEntity<Mascota>(HttpStatus.BAD_REQUEST);
+            }
+            
+            Mascota mascota = new Mascota();
+            mascota.setDuenio(duenio);
+            mascota.setVeterinario(veterinario);       
+            
+            
+            Mascota m = this.mascotaService.RegistrarMascota(mascota, infoMascota);
+       
+            return new ResponseEntity<Mascota>(mascota, HttpStatus.CREATED);
     }
    
     @GetMapping

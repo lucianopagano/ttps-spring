@@ -13,6 +13,8 @@ import ttps.spring.daos.NombreCampoDAO;
 import ttps.spring.daos.RazaDAO;
 import ttps.spring.daos.TipoUsuarioDAO;
 import ttps.spring.daos.UsuarioDAO;
+import ttps.spring.dto.InformacionMascotaDto;
+import ttps.spring.dto.VeterinarioDto;
 import ttps.spring.model.CampoFicha;
 import ttps.spring.model.Especie;
 import ttps.spring.model.Mascota;
@@ -113,5 +115,35 @@ public class MascotaServiceImpl implements MascotaService {
 	public List<Raza> ObtenerTodasLasRazas()
 	{
 		return razaDAO.recuperarTodos(null);
+	}
+
+	@Override
+	public Mascota RegistrarMascota(Mascota nuevaMascota, InformacionMascotaDto infoMascota) {
+				
+		List<CampoFicha> ficha = new ArrayList<CampoFicha>();
+        
+		NombreCampo campoNombre = campoDao.recuperarPorNombreDescripcion("nombre", "Nombre");		
+	    CampoFicha fichaNombre = new CampoFicha(nuevaMascota, campoNombre, true, infoMascota.getNombre());	    
+	    ficha.add(fichaNombre);
+		
+	    NombreCampo campoColor = campoDao.recuperarPorNombreDescripcion("nombre", "Color");		
+	    CampoFicha fichaColor = new CampoFicha(nuevaMascota, campoColor, true, infoMascota.getColor());	    
+	    ficha.add(fichaColor);
+	    
+	    NombreCampo campoSenasParticulares = campoDao.recuperarPorNombreDescripcion("nombre", "SenasParticulares");		
+	    CampoFicha fichaSenasParticulares = new CampoFicha(nuevaMascota, campoSenasParticulares, true, infoMascota.getSenasParticulares());	    
+	    ficha.add(fichaSenasParticulares);
+	    
+	    NombreCampo campoFechaNacimiento = campoDao.recuperarPorNombreDescripcion("nombre", "FechaNacimiento");		
+	    CampoFicha fichaFechaNacimiento = new CampoFicha(nuevaMascota, campoFechaNacimiento, true, infoMascota.getFechanacimiento());	    
+	    ficha.add(fichaFechaNacimiento);
+	    
+	    NombreCampo campoSexo = campoDao.recuperarPorNombreDescripcion("nombre", "Sexo");		
+	    CampoFicha fichaSexo = new CampoFicha(nuevaMascota, campoSexo, true, infoMascota.getSexo());	    
+	    ficha.add(fichaSexo);
+        
+        nuevaMascota.setFicha(ficha);
+        
+        return mascotaDao.persistir(nuevaMascota);
 	}
 }
