@@ -114,4 +114,10 @@ public class MascotaServiceImpl implements MascotaService {
 	{
 		return razaDAO.recuperarTodos(null);
 	}
+	
+	@Override
+	public Raza ObtenerRaza(int idRaza)
+	{
+		return razaDAO.recuperar(idRaza);
+	}
 }

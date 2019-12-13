@@ -23,4 +23,6 @@ public interface MascotaService {
 	List<Mascota> ObtenerPacientesVeterinario(int veterinarioId);
 	
 	List<Raza> ObtenerTodasLasRazas();
+	
+	Raza ObtenerRaza(int idRaza);
 }

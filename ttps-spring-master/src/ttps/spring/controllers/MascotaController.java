@@ -104,6 +104,20 @@ public class MascotaController {
   		
   	}
   	
+  	@GetMapping("/raza/{id}")
+  	public ResponseEntity<Raza> obtenerRaza(@PathVariable int id)
+  	{
+  		Raza raza = mascotaService.ObtenerRaza(id);
+  	
+  		if (raza != null) 
+  		{
+  			return new ResponseEntity<Raza>(raza, HttpStatus.OK);
+  		}
+  		
+  		return new ResponseEntity<Raza>(HttpStatus.NO_CONTENT);	
+  		
+  	}
+  	
   	
   	@GetMapping("/razas")
   	public ResponseEntity<List<RazaEspecieDto>> obtenerTodasLasRazas()
