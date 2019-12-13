@@ -94,7 +94,9 @@ public class InformacionMascotaDto {
 				this.sexo = unCampo.getValor();
 				break;
 			case "imagen":
-				this.urlImagen = unCampo.getValor();
+				this.urlImagen = "http://localhost:8080/ttps-spring/imagenes/"+ unCampo.getValor();
+				break;
+
 			}		
 		}
 		
