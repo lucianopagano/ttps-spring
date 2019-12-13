@@ -7,5 +7,5 @@ import ttps.spring.model.Mascota;
 @Repository
 public interface MascotaDAO extends GenericDAO<Mascota> 
 {
-	
+	Mascota RegistrarMascota(Mascota mascota);
 }

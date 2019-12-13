@@ -14,6 +14,7 @@ import ttps.spring.daos.RazaDAO;
 import ttps.spring.daos.TipoUsuarioDAO;
 import ttps.spring.daos.UsuarioDAO;
 import ttps.spring.dto.InformacionMascotaDto;
+import ttps.spring.dto.NuevaMascotaDto;
 import ttps.spring.dto.VeterinarioDto;
 import ttps.spring.model.CampoFicha;
 import ttps.spring.model.Especie;
@@ -118,7 +119,7 @@ public class MascotaServiceImpl implements MascotaService {
 	}
 
 	@Override
-	public Mascota RegistrarMascota(Mascota nuevaMascota, InformacionMascotaDto infoMascota) {
+	public Mascota RegistrarMascota(Mascota nuevaMascota, NuevaMascotaDto infoMascota) {
 				
 		List<CampoFicha> ficha = new ArrayList<CampoFicha>();
         
@@ -144,11 +145,11 @@ public class MascotaServiceImpl implements MascotaService {
         
         nuevaMascota.setFicha(ficha);
         
-        return mascotaDao.persistir(nuevaMascota);
+        return mascotaDao.RegistrarMascota(nuevaMascota);
 	}
 	
 	@Override
-	public Raza ObtenerRaza(int idRaza)
+	public Raza ObtenerRaza(String idRaza)
 	{
 		return razaDAO.recuperar(idRaza);
 	}
