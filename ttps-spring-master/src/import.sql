@@ -96,28 +96,28 @@ INSERT INTO campoficha(id, valor, visibilidad, CAMPO_ID, MascotaId) VALUES(105, 
 INSERT INTO campoficha(id, valor, visibilidad, CAMPO_ID, MascotaId) VALUES(106, 'M', 0, 20, 113);
 INSERT INTO campoficha(id, valor, visibilidad, CAMPO_ID, MascotaId) VALUES(107, 'Gris y Blanco', 1, 21, 113);
 INSERT INTO campoficha(id, valor, visibilidad, CAMPO_ID, MascotaId) VALUES(108, 'N/A', 0, 22, 113);	
-INSERT INTO campoficha(id, valor, visibilidad, CAMPO_ID, MascotaId) VALUES (109, 'gato.jpg', 1, 24, 113);
+INSERT INTO campoficha(id, valor, visibilidad, CAMPO_ID, MascotaId) VALUES (109, 'papagayo.jpg', 1, 24, 113);
 
 INSERT INTO campoficha(id, valor, visibilidad, CAMPO_ID, MascotaId) VALUES(110, 'Laika', 1,  18, 114);
 INSERT INTO campoficha(id, valor, visibilidad, CAMPO_ID, MascotaId) VALUES(111, '11-02-2019', 1, 19, 114);
 INSERT INTO campoficha(id, valor, visibilidad, CAMPO_ID, MascotaId) VALUES(112, 'F', 0, 20, 114);
 INSERT INTO campoficha(id, valor, visibilidad, CAMPO_ID, MascotaId) VALUES(113, 'Renguea', 1, 21, 114);
 INSERT INTO campoficha(id, valor, visibilidad, CAMPO_ID, MascotaId) VALUES(114, 'Color negro', 0, 22, 114);	
-INSERT INTO campoficha(id, valor, visibilidad, CAMPO_ID, MascotaId) VALUES (115, 'gato.jpg', 1, 24, 114);
+INSERT INTO campoficha(id, valor, visibilidad, CAMPO_ID, MascotaId) VALUES (115, 'perico.jpg', 1, 24, 114);
 
 INSERT INTO campoficha(id, valor, visibilidad, CAMPO_ID, MascotaId) VALUES(116, 'Pluto', 1,  18, 115);
 INSERT INTO campoficha(id, valor, visibilidad, CAMPO_ID, MascotaId) VALUES(117, '11-02-2019', 1, 19, 115);
 INSERT INTO campoficha(id, valor, visibilidad, CAMPO_ID, MascotaId) VALUES(118, 'M', 0, 20, 115);
 INSERT INTO campoficha(id, valor, visibilidad, CAMPO_ID, MascotaId) VALUES(119, 'Manchado', 1, 21, 115);
 INSERT INTO campoficha(id, valor, visibilidad, CAMPO_ID, MascotaId) VALUES(120, 'Color negro', 0, 22, 115);	
-INSERT INTO campoficha(id, valor, visibilidad, CAMPO_ID, MascotaId) VALUES (121, 'gato.jpg', 1, 24, 115);
+INSERT INTO campoficha(id, valor, visibilidad, CAMPO_ID, MascotaId) VALUES (121, 'mascota.jpg', 1, 24, 115);
 
 INSERT INTO campoficha(id, valor, visibilidad, CAMPO_ID, MascotaId) VALUES(122, 'Niebla', 1,  18, 116);
 INSERT INTO campoficha(id, valor, visibilidad, CAMPO_ID, MascotaId) VALUES(123, '11-02-2019', 1, 19, 116);
 INSERT INTO campoficha(id, valor, visibilidad, CAMPO_ID, MascotaId) VALUES(124, 'F', 0, 20, 116);
 INSERT INTO campoficha(id, valor, visibilidad, CAMPO_ID, MascotaId) VALUES(125, 'Blanco', 1, 21, 116);
 INSERT INTO campoficha(id, valor, visibilidad, CAMPO_ID, MascotaId) VALUES(126, 'Color negro', 0, 22, 116);	
-INSERT INTO campoficha(id, valor, visibilidad, CAMPO_ID, MascotaId) VALUES (127, 'gato.jpg', 1, 24, 116);
+INSERT INTO campoficha(id, valor, visibilidad, CAMPO_ID, MascotaId) VALUES (127, 'gato2.jpg', 1, 24, 116);
 
 INSERT INTO campoficha(id, valor, visibilidad, CAMPO_ID, MascotaId) VALUES(128, 'Tita', 1,  18, 117);
 INSERT INTO campoficha(id, valor, visibilidad, CAMPO_ID, MascotaId) VALUES(129, '11-02-2019', 1, 19, 117);

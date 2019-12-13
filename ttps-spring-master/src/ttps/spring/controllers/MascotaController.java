@@ -1,7 +1,10 @@
 package ttps.spring.controllers;
  
  
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
  
 import javax.servlet.http.HttpServletRequest;
@@ -15,8 +18,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
- 
+import org.springframework.web.multipart.MultipartFile;
+
 import ttps.spring.dto.IdentityDto;
 import ttps.spring.dto.InformacionMascotaDto;
 import ttps.spring.dto.MascotaDto;
@@ -182,7 +187,7 @@ public class MascotaController {
             mascota.setRaza(raza);     
             
             Mascota m = this.mascotaService.RegistrarMascota(mascota, infoMascota);
-       
+ 
             return new ResponseEntity<Mascota>(mascota, HttpStatus.CREATED);
     }
    
