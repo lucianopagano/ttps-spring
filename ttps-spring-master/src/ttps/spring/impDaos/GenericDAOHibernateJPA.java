@@ -11,6 +11,7 @@ import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 
 import ttps.spring.daos.*;
+import ttps.spring.model.Usuario;
 
 @Transactional
 public class GenericDAOHibernateJPA<T> implements GenericDAO<T> {
@@ -102,9 +103,19 @@ public class GenericDAOHibernateJPA<T> implements GenericDAO<T> {
 		Query consulta= this.getEntityManager().createQuery
 				("SELECT e FROM " +  getPersistentClass().getName() +" e WHERE e.id="+ id );
 	
+//		@SuppressWarnings("unchecked")
+//		T resultado = (T) consulta.getSingleResult();
+//		
+//		return resultado;
+		
 		@SuppressWarnings("unchecked")
-		T resultado = (T) consulta.getSingleResult();
-		return resultado;
+		List<T> resultado = (List<T>) consulta.getResultList();
+		if(!resultado.isEmpty())
+		{
+			return resultado.get(0);
+		}
+		
+		return null;
 	}
 	
 	@Override

@@ -13,6 +13,10 @@ public class InformacionMascotaDto {
 	private String color;
 	private String sexo;
 	private String urlImagen;
+	private String nombreVeterinario;
+	private String nombreDuenio;
+	private String descripcionRaza;
+	private String descripcionEspecie;
 	
 	public String getUrlImagen() {
 		return urlImagen;
@@ -90,13 +94,40 @@ public class InformacionMascotaDto {
 				this.sexo = unCampo.getValor();
 				break;
 			case "imagen":
-				//String  HttpServletRequest.getLocalPort();
-				//this.urlImagen = // MyUtils.createURL(request,"/path/to/resource.html");
+				this.urlImagen = unCampo.getValor();
 			}		
 		}
 		
 		this.idDueno = unaMascota.getDuenio().getId();
+		this.nombreDuenio = unaMascota.getDuenio().getNombre() +" "+ unaMascota.getDuenio().getApellido();
+		this.nombreVeterinario = unaMascota.getVeterinario().getNombre()+" "+unaMascota.getVeterinario().getApellido();
 		this.idVeterinario = unaMascota.getVeterinario().getId();
 		this.raza = unaMascota.getRaza().getDescripcion();
+		this.descripcionRaza = unaMascota.getRaza().getDescripcion();
+		this.descripcionEspecie = unaMascota.getRaza().getEspecie().getDescripcion();
+	}
+	public String getNombreVeterinario() {
+		return nombreVeterinario;
+	}
+	public void setNombreVeterinario(String nombreVeterinario) {
+		this.nombreVeterinario = nombreVeterinario;
+	}
+	public String getNombreDuenio() {
+		return nombreDuenio;
+	}
+	public void setNombreDuenio(String nombreDuenio) {
+		this.nombreDuenio = nombreDuenio;
+	}
+	public String getDescripcionRaza() {
+		return descripcionRaza;
+	}
+	public void setDescripcionRaza(String descripcionRaza) {
+		this.descripcionRaza = descripcionRaza;
+	}
+	public String getDescripcionEspecie() {
+		return descripcionEspecie;
+	}
+	public void setDescripcionEspecie(String descripcionEspecie) {
+		this.descripcionEspecie = descripcionEspecie;
 	}
 }

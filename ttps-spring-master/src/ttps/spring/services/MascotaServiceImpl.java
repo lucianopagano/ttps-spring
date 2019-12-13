@@ -145,5 +145,10 @@ public class MascotaServiceImpl implements MascotaService {
         nuevaMascota.setFicha(ficha);
         
         return mascotaDao.persistir(nuevaMascota);
+	
+	@Override
+	public Raza ObtenerRaza(int idRaza)
+	{
+		return razaDAO.recuperar(idRaza);
 	}
 }
