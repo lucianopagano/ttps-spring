@@ -3,6 +3,7 @@ import java.io.Serializable;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -20,12 +21,12 @@ public class CampoFicha implements Serializable {
 	private long id;
 
 	@ManyToOne(optional = true ,cascade = CascadeType.MERGE)
-	@JoinColumn(name = "MascotaId",nullable = false)
+	@JoinColumn(name = "MascotaId")
 	@JsonIgnore()
 	private Mascota mascota;
 
-	@ManyToOne(cascade = CascadeType.MERGE)
-	@JoinColumn(name = "CAMPO_ID")
+	@ManyToOne()
+	@JoinColumn(name = "CAMPO_ID",nullable = false)
 	private NombreCampo campo;	
 	
 	private Boolean visibilidad;

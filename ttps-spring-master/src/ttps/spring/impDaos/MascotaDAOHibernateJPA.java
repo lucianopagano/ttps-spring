@@ -19,9 +19,10 @@ public class MascotaDAOHibernateJPA extends GenericDAOHibernateJPA<Mascota> impl
 		nuevaMascota.setDuenio(mascota.getDuenio());
 		nuevaMascota.setRaza(mascota.getRaza());
 		nuevaMascota.setVeterinario(mascota.getVeterinario());
-		nuevaMascota.setCampoFicha(mascota.getCampoFicha());	
 		
 		this.getEntityManager().persist(nuevaMascota);
-		 return nuevaMascota;
+		this.getEntityManager().flush();	
+		
+		return nuevaMascota;
 	}	
 }

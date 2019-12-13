@@ -176,6 +176,7 @@ public class MascotaController {
             }
             
             Mascota mascota = new Mascota();
+            mascota.setId(0);
             mascota.setDuenio(duenio);
             mascota.setVeterinario(veterinario);   
             mascota.setRaza(raza);     

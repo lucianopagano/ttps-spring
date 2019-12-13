@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import ttps.spring.daos.CampoFichaDAO;
 import ttps.spring.daos.EspecieDAO;
 import ttps.spring.daos.MascotaDAO;
 import ttps.spring.daos.NombreCampoDAO;
@@ -45,6 +46,8 @@ public class MascotaServiceImpl implements MascotaService {
 	@Autowired
 	NombreCampoDAO campoDao;
 	
+	@Autowired
+	CampoFichaDAO campoFichaDao;
 	
 	@Override
 	public Mascota CrearMascota(Mascota mascotaACrear) {
@@ -119,33 +122,37 @@ public class MascotaServiceImpl implements MascotaService {
 	}
 
 	@Override
-	public Mascota RegistrarMascota(Mascota nuevaMascota, NuevaMascotaDto infoMascota) {
-				
-		List<CampoFicha> ficha = new ArrayList<CampoFicha>();
+	public Mascota RegistrarMascota(Mascota nuevaMascota, NuevaMascotaDto infoMascota) {        
+        
+		Mascota mascotaPersistida =  mascotaDao.RegistrarMascota(nuevaMascota);
+		
+        List<CampoFicha> ficha = new ArrayList<CampoFicha>();
         
 		NombreCampo campoNombre = campoDao.recuperarPorNombreDescripcion("nombre", "Nombre");		
-	    CampoFicha fichaNombre = new CampoFicha(nuevaMascota, campoNombre, true, infoMascota.getNombre());	    
+	    CampoFicha fichaNombre = new CampoFicha(mascotaPersistida, campoNombre, true, infoMascota.getNombre());	    
 	    ficha.add(fichaNombre);
 		
 	    NombreCampo campoColor = campoDao.recuperarPorNombreDescripcion("nombre", "Color");		
-	    CampoFicha fichaColor = new CampoFicha(nuevaMascota, campoColor, true, infoMascota.getColor());	    
+	    CampoFicha fichaColor = new CampoFicha(mascotaPersistida, campoColor, true, infoMascota.getColor());	    
 	    ficha.add(fichaColor);
 	    
 	    NombreCampo campoSenasParticulares = campoDao.recuperarPorNombreDescripcion("nombre", "SenasParticulares");		
-	    CampoFicha fichaSenasParticulares = new CampoFicha(nuevaMascota, campoSenasParticulares, true, infoMascota.getSenasParticulares());	    
+	    CampoFicha fichaSenasParticulares = new CampoFicha(mascotaPersistida, campoSenasParticulares, true, infoMascota.getSenasParticulares());	    
 	    ficha.add(fichaSenasParticulares);
 	    
 	    NombreCampo campoFechaNacimiento = campoDao.recuperarPorNombreDescripcion("nombre", "FechaNacimiento");		
-	    CampoFicha fichaFechaNacimiento = new CampoFicha(nuevaMascota, campoFechaNacimiento, true, infoMascota.getFechanacimiento());	    
+	    CampoFicha fichaFechaNacimiento = new CampoFicha(mascotaPersistida, campoFechaNacimiento, true, infoMascota.getFechanacimiento());	    
 	    ficha.add(fichaFechaNacimiento);
 	    
 	    NombreCampo campoSexo = campoDao.recuperarPorNombreDescripcion("nombre", "Sexo");		
-	    CampoFicha fichaSexo = new CampoFicha(nuevaMascota, campoSexo, true, infoMascota.getSexo());	    
+	    CampoFicha fichaSexo = new CampoFicha(mascotaPersistida, campoSexo, true, infoMascota.getSexo());	    
 	    ficha.add(fichaSexo);
+	    
+	    for (CampoFicha unCampoFicha : ficha) {
+			campoFichaDao.persistir(unCampoFicha);
+		} 
         
-        nuevaMascota.setFicha(ficha);
-        
-        return mascotaDao.RegistrarMascota(nuevaMascota);
+        return mascotaPersistida;
 	}
 	
 	@Override

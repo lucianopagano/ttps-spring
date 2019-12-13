@@ -33,8 +33,7 @@ public class Usuario implements Serializable {
 	private String apellido;
 	
 	private String telefono;
-	
-	
+		
 	private String email;
 	
 	@OneToOne(optional = true, cascade = CascadeType.ALL)
