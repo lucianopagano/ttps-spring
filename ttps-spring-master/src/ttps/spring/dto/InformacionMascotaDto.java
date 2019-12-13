@@ -90,8 +90,8 @@ public class InformacionMascotaDto {
 				this.sexo = unCampo.getValor();
 				break;
 			case "imagen":
-				//String  HttpServletRequest.getLocalPort();
-				//this.urlImagen = // MyUtils.createURL(request,"/path/to/resource.html");
+				this.urlImagen = "http://localhost:8080/ttps-spring/imagenes/"+ unCampo.getValor();
+				break;
 			}		
 		}
 		
